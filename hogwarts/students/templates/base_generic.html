@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    {% block title %}<title>Хогвартс</title>{% endblock %}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+  </head>
+  <body>
+    <div class="container-fluid" style="margin-top: 20px;">
+      <div class="row">
+        <!-- Левая колонка для меню (Задание 1) -->
+        <div class="col-sm-3">
+          {% block sidebar %}
+            <!-- Оформление меню и бейджей (Задания 2 и 6) -->
+            <div class="list-group">
+              <a href="{% url 'index' %}" class="list-group-item active">Главная</a>
+              <a href="{% url 'students_list' %}" class="list-group-item">
+                Студенты <span class="badge">{{ num_students }}</span>
+              </a>
+              <a href="{% url 'teachers_list' %}" class="list-group-item">
+                Преподаватели <span class="badge">{{ num_teachers }}</span>
+              </a>
+              <a href="{% url 'groups_list' %}" class="list-group-item">
+                Группы <span class="badge">{{ num_groups }}</span>
+              </a>
+              <a href="{% url 'faculties_list' %}" class="list-group-item">
+                Факультеты <span class="badge">{{ num_faculties }}</span>
+              </a>
+              <a href="{% url 'disciplines_list' %}" class="list-group-item">
+                Дисциплины <span class="badge">{{ num_disciplines }}</span>
+              </a>
+            </div>
+          {% endblock %}
+        </div>
+        
+        <!-- Правая колонка для контента -->
+        <div class="col-sm-9">
+          {% block content %}{% endblock %}
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

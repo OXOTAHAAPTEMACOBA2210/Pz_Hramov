@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}{{ machine.name }}{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h1 class="mb-4">{{ machine.name }}</h1>
+        <dl class="row fs-5">
+            <dt class="col-sm-4">Инвентарный номер</dt>
+            <dd class="col-sm-8">{{ machine.inventory_number }}</dd>
+
+            <dt class="col-sm-4">Категория</dt>
+            <dd class="col-sm-8">{{ machine.get_category_display }}</dd>
+
+            <dt class="col-sm-4">Производитель</dt>
+            <dd class="col-sm-8">{{ machine.manufacturer }}</dd>
+
+            <dt class="col-sm-4">Год выпуска</dt>
+            <dd class="col-sm-8">{{ machine.year }}</dd>
+
+            <dt class="col-sm-4">Статус</dt>
+            <dd class="col-sm-8">
+                <span class="badge 
+                    {% if machine.status == 'W' %}bg-success
+                    {% elif machine.status == 'R' %}bg-warning text-dark
+                    {% elif machine.status == 'S' %}bg-secondary
+                    {% elif machine.status == 'D' %}bg-danger{% endif %}">
+                    {{ machine.get_status_display }}
+                </span>
+            </dd>
+        </dl>
+        
+        <h4 class="mt-4">Описание</h4>
+        {% if machine.description %}
+            <p>{{ machine.description }}</p>
+        {% else %}
+            <p class="text-muted">Описание не указано.</p>
+        {% endif %}
+
+        <hr>
+        <a href="{% url 'machine_list' %}" class="btn btn-secondary">Назад к списку</a>
+    </div>
+</div>
+{% endblock %}

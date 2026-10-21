@@ -1,0 +1,66 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <!-- Оформление заголовка (Задание 3) -->
+  <div class="jumbotron">
+    <h1>Университет Хогвартс</h1>
+    <p>Информационная система управления Школой Чародейства и Волшебства.</p>
+    
+    <!-- Добавление кнопок (Задание 7) -->
+    <p>
+      <a href="{% url 'students_list' %}" class="btn btn-primary btn-lg">Управление студентами</a>
+      <a href="{% url 'teachers_list' %}" class="btn btn-success btn-lg">Штат преподавателей</a>
+    </p>
+  </div>
+
+  <!-- Информационное сообщение (Задание 8) -->
+  <div class="alert alert-info">
+    <strong>Справка:</strong> Ниже представлена актуальная статистика по нашей базе данных.
+  </div>
+
+  <!-- Сетка для статистики (Задание 5) -->
+  <div class="row">
+    <!-- Блок студентов (Задание 4) -->
+    <div class="col-sm-6">
+      <div class="panel panel-primary">
+        <div class="panel-heading">Студенты</div>
+        <div class="panel-body">Зачислено учеников: <strong>{{ num_students }}</strong></div>
+      </div>
+    </div>
+    
+    <!-- Блок преподавателей -->
+    <div class="col-sm-6">
+      <div class="panel panel-success">
+        <div class="panel-heading">Преподаватели</div>
+        <div class="panel-body">Штат профессоров: <strong>{{ num_teachers }}</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Второй ряд сетки -->
+  <div class="row">
+    <!-- Блок групп -->
+    <div class="col-sm-4">
+      <div class="panel panel-warning">
+        <div class="panel-heading">Учебные группы</div>
+        <div class="panel-body">Количество: <strong>{{ num_groups }}</strong></div>
+      </div>
+    </div>
+
+    <!-- Блок факультетов -->
+    <div class="col-sm-4">
+      <div class="panel panel-danger">
+        <div class="panel-heading">Факультеты</div>
+        <div class="panel-body">Количество: <strong>{{ num_faculties }}</strong></div>
+      </div>
+    </div>
+
+    <!-- Блок дисциплин -->
+    <div class="col-sm-4">
+      <div class="panel panel-info">
+        <div class="panel-heading">Дисциплины</div>
+        <div class="panel-body">Количество: <strong>{{ num_disciplines }}</strong></div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
