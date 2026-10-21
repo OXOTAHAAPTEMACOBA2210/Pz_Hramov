@@ -11,9 +11,6 @@ env/
 venv/
 ENV/
 
-# Database
-*.sqlite3
-
 # IDE & OS
 .vscode/
 .idea/
