@@ -14,7 +14,7 @@
   <table class="table table-striped table-hover table-bordered">
     <thead class="bg-info" style="color: white;">
       <tr>
-        <th>#</th>
+        <th style="width: 60px; text-align: center;">ID</th>
         <th>Название дисциплины</th>
         <th>Преподаватель</th>
         <th>Действие</th>
@@ -23,7 +23,7 @@
     <tbody>
       {% for discipline in disciplines %}
         <tr>
-          <td>{{ forloop.counter }}</td>
+          <td style="text-align: center; font-weight: bold; color: #555;">{{ discipline.id }}</td>
           <td><strong>{{ discipline.name }}</strong></td>
           <td>
             {% if discipline.teacher %}

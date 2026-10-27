@@ -14,7 +14,7 @@
   <table class="table table-striped table-hover table-bordered">
     <thead class="bg-success" style="color: white;">
       <tr>
-        <th>#</th>
+        <th style="width: 60px; text-align: center;">ID</th>
         <th>Преподаватель</th>
         <th>Должность</th>
         <th>Читаемые дисциплины</th>
@@ -24,7 +24,7 @@
     <tbody>
       {% for teacher in teachers %}
         <tr>
-          <td>{{ forloop.counter }}</td>
+          <td style="text-align: center; font-weight: bold; color: #555;">{{ teacher.id }}</td>
           <td><strong>{{ teacher.first_name }} {{ teacher.last_name }}</strong></td>
           <td>{{ teacher.position }}</td>
           <td>
