@@ -44,7 +44,7 @@ class Teacher(models.Model):
         ordering = ['last_name', 'first_name']
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name}"
+        return f"{self.last_name} {self.first_name}"
 
     def get_absolute_url(self):
         return reverse('teacher_detail', args=[str(self.id)])
@@ -80,7 +80,7 @@ class Student(models.Model):
         ordering = ['last_name', 'first_name']
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name} ({self.group})"
+        return f"{self.last_name} {self.first_name} ({self.group})"
 
     def get_absolute_url(self):
         return reverse('student_detail', args=[str(self.id)])

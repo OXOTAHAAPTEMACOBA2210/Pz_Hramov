@@ -30,8 +30,8 @@
   <table class="table table-striped table-hover table-bordered">
     <thead class="bg-primary" style="color: white;">
       <tr>
-        <th style="width: 60px; text-align: center;">ID</th>
-        <th>Имя и Фамилия</th>
+        <th style="width: 50px; text-align: center;">#</th>
+        <th>Фамилия и Имя</th>
         <th>Группа</th>
         <th>Факультет</th>
         <th>Email</th>
@@ -41,8 +41,10 @@
     <tbody>
       {% for student in students %}
         <tr>
-          <td style="text-align: center; font-weight: bold; color: #555;">{{ student.id }}</td>
-          <td><strong>{{ student.first_name }} {{ student.last_name }}</strong></td>
+          <td style="text-align: center; font-weight: bold; color: #555;">
+            {% if is_paginated %}{{ page_obj.start_index|add:forloop.counter0 }}{% else %}{{ forloop.counter }}{% endif %}
+          </td>
+          <td><strong>{{ student.last_name }} {{ student.first_name }}</strong></td>
           <td><a href="{% url 'group_detail' student.group.pk %}">{{ student.group.name }}</a></td>
           <td><span class="label label-info">{{ student.group.faculty.name }}</span></td>
           <td>{{ student.email }}</td>

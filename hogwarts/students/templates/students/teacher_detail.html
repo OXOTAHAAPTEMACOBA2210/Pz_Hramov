@@ -1,24 +1,24 @@
 {% extends "base_generic.html" %}
 
-{% block title %}<title>{{ teacher.first_name }} {{ teacher.last_name }} — Преподаватель</title>{% endblock %}
+{% block title %}<title>{{ teacher.last_name }} {{ teacher.first_name }} — Преподаватель</title>{% endblock %}
 
 {% block content %}
 <ol class="breadcrumb">
   <li><a href="{% url 'index' %}">Главная</a></li>
   <li><a href="{% url 'teachers_list' %}">Преподаватели</a></li>
-  <li class="active">{{ teacher.first_name }} {{ teacher.last_name }}</li>
+  <li class="active">{{ teacher.last_name }} {{ teacher.first_name }}</li>
 </ol>
 
 <div class="panel panel-success">
   <div class="panel-heading">
     <h3 class="panel-title">
-      <span class="glyphicon glyphicon-education"></span> Профиль преподавателя: {{ teacher.first_name }} {{ teacher.last_name }}
+      <span class="glyphicon glyphicon-education"></span> Профиль преподавателя: {{ teacher.last_name }} {{ teacher.first_name }}
     </h3>
   </div>
   <div class="panel-body">
     <dl class="dl-horizontal" style="font-size: 16px;">
-      <dt>Имя и Фамилия:</dt>
-      <dd><strong>{{ teacher.first_name }} {{ teacher.last_name }}</strong></dd>
+      <dt>Фамилия и Имя:</dt>
+      <dd><strong>{{ teacher.last_name }} {{ teacher.first_name }}</strong></dd>
 
       <dt>Должность:</dt>
       <dd>{{ teacher.position }}</dd>

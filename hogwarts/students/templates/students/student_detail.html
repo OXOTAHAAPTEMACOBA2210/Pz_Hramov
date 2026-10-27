@@ -1,6 +1,6 @@
 {% extends "base_generic.html" %}
 
-{% block title %}<title>{{ student.first_name }} {{ student.last_name }} — Профиль студента</title>{% endblock %}
+{% block title %}<title>{{ student.last_name }} {{ student.first_name }} — Профиль студента</title>{% endblock %}
 
 {% block content %}
 <ol class="breadcrumb">
@@ -12,7 +12,7 @@
 <div class="panel panel-primary">
   <div class="panel-heading">
     <h3 class="panel-title">
-      <span class="glyphicon glyphicon-user"></span> Карточка студента: {{ student.first_name }} {{ student.last_name }}
+      <span class="glyphicon glyphicon-user"></span> Карточка студента: {{ student.last_name }} {{ student.first_name }}
     </h3>
   </div>
   <div class="panel-body">
