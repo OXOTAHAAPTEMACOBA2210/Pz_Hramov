@@ -1,0 +1,44 @@
+{% extends "base_generic.html" %}
+
+{% block title %}<title>{{ discipline.name }} — Дисциплина</title>{% endblock %}
+
+{% block content %}
+<ol class="breadcrumb">
+  <li><a href="{% url 'index' %}">Главная</a></li>
+  <li><a href="{% url 'disciplines_list' %}">Дисциплины</a></li>
+  <li class="active">{{ discipline.name }}</li>
+</ol>
+
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      <span class="glyphicon glyphicon-book"></span> Дисциплина: {{ discipline.name }}
+    </h3>
+  </div>
+  <div class="panel-body">
+    <dl class="dl-horizontal" style="font-size: 16px;">
+      <dt>Название:</dt>
+      <dd><strong>{{ discipline.name }}</strong></dd>
+
+      <dt>Преподаватель:</dt>
+      <dd>
+        {% if discipline.teacher %}
+          <a href="{% url 'teacher_detail' discipline.teacher.pk %}" class="label label-success" style="font-size: 14px;">
+            <span class="glyphicon glyphicon-education"></span> {{ discipline.teacher.first_name }} {{ discipline.teacher.last_name }}
+          </a>
+          <span class="text-muted">({{ discipline.teacher.position }})</span>
+        {% else %}
+          <span class="text-muted">Преподаватель не назначен.</span>
+        {% endif %}
+      </dd>
+
+      <dt>Описание курса:</dt>
+      <dd>{{ discipline.description|default:"Описание пока не заполнено." }}</dd>
+    </dl>
+
+    <hr>
+    <a href="{% url 'disciplines_list' %}" class="btn btn-default">&larr; Вернуться к списку дисциплин</a>
+    <a href="{% url 'index' %}" class="btn btn-link">На главную</a>
+  </div>
+</div>
+{% endblock %}

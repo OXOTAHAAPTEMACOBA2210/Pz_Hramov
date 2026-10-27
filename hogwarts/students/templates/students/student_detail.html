@@ -1,0 +1,52 @@
+{% extends "base_generic.html" %}
+
+{% block title %}<title>{{ student.first_name }} {{ student.last_name }} — Профиль студента</title>{% endblock %}
+
+{% block content %}
+<ol class="breadcrumb">
+  <li><a href="{% url 'index' %}">Главная</a></li>
+  <li><a href="{% url 'students_list' %}">Студенты</a></li>
+  <li class="active">{{ student.last_name }} {{ student.first_name }}</li>
+</ol>
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      <span class="glyphicon glyphicon-user"></span> Карточка студента: {{ student.first_name }} {{ student.last_name }}
+    </h3>
+  </div>
+  <div class="panel-body">
+    <dl class="dl-horizontal" style="font-size: 16px;">
+      <dt>Фамилия:</dt>
+      <dd><strong>{{ student.last_name }}</strong></dd>
+
+      <dt>Имя:</dt>
+      <dd>{{ student.first_name }}</dd>
+
+      <dt>Учебная группа:</dt>
+      <dd>
+        <a href="{% url 'group_detail' student.group.pk %}" class="label label-primary" style="font-size: 14px;">
+          {{ student.group.name }}
+        </a>
+      </dd>
+
+      <dt>Факультет:</dt>
+      <dd>
+        <a href="{% url 'faculty_detail' student.group.faculty.pk %}" class="label label-info" style="font-size: 14px;">
+          {{ student.group.faculty.name }}
+        </a>
+      </dd>
+
+      <dt>Электронная почта:</dt>
+      <dd><a href="mailto:{{ student.email }}">{{ student.email }}</a></dd>
+
+      <dt>Дата зачисления:</dt>
+      <dd>{{ student.enrollment_date|date:"d.m.Y" }}</dd>
+    </dl>
+
+    <hr>
+    <a href="{% url 'students_list' %}" class="btn btn-default">&larr; Вернуться к списку студентов</a>
+    <a href="{% url 'index' %}" class="btn btn-link">На главную</a>
+  </div>
+</div>
+{% endblock %}

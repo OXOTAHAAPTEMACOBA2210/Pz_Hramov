@@ -1,0 +1,44 @@
+{% extends "base_generic.html" %}
+
+{% block title %}<title>Учебные группы — Университет Хогвартс</title>{% endblock %}
+
+{% block content %}
+<div class="page-header" style="margin-top: 0;">
+  <h2>
+    Учебные группы
+    <span class="badge" style="font-size: 18px; vertical-align: middle;">Всего: {{ total_count }}</span>
+  </h2>
+</div>
+
+<div class="row">
+  {% for group in groups %}
+    <div class="col-sm-6 col-md-4">
+      <div class="panel panel-warning">
+        <div class="panel-heading">
+          <h3 class="panel-title" style="font-weight: bold;">{{ group.name }}</h3>
+        </div>
+        <div class="panel-body">
+          <p><strong>Факультет:</strong> <a href="{% url 'faculty_detail' group.faculty.pk %}">{{ group.faculty.name }}</a></p>
+          <p>
+            <strong>Студентов в группе:</strong> 
+            <span class="badge" style="background-color: #f0ad4e;">{{ group.students.count }}</span>
+          </p>
+          <a href="{% url 'group_detail' group.pk %}" class="btn btn-warning btn-sm btn-block">
+            Посмотреть состав группы &raquo;
+          </a>
+        </div>
+      </div>
+    </div>
+  {% empty %}
+    <div class="col-sm-12">
+      <div class="alert alert-warning">
+        Учебные группы пока не созданы.
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+<p style="margin-top: 15px;">
+  <a href="{% url 'index' %}" class="btn btn-default">&larr; На главную страницу</a>
+</p>
+{% endblock %}

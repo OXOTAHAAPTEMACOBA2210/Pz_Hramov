@@ -1,0 +1,44 @@
+{% extends "base_generic.html" %}
+
+{% block title %}<title>Группа {{ group.name }} — Состав</title>{% endblock %}
+
+{% block content %}
+<ol class="breadcrumb">
+  <li><a href="{% url 'index' %}">Главная</a></li>
+  <li><a href="{% url 'groups_list' %}">Группы</a></li>
+  <li class="active">{{ group.name }}</li>
+</ol>
+
+<div class="panel panel-warning">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      <span class="glyphicon glyphicon-th-list"></span> Сведения о группе: {{ group.name }}
+    </h3>
+  </div>
+  <div class="panel-body">
+    <p style="font-size: 16px;">
+      <strong>Факультет:</strong>
+      <a href="{% url 'faculty_detail' group.faculty.pk %}" class="label label-info" style="font-size: 15px;">
+        {{ group.faculty.name }}
+      </a>
+    </p>
+
+    <!-- Вывод списка всех студентов группы (Самостоятельное усложнение из ПЗ 7) -->
+    <h4 style="margin-top: 25px;">Студенты данной группы:</h4>
+    <div class="list-group" style="max-width: 600px;">
+      {% for student in group.students.all %}
+        <a href="{% url 'student_detail' student.pk %}" class="list-group-item">
+          <span class="glyphicon glyphicon-user"></span> {{ student.last_name }} {{ student.first_name }}
+          <span class="pull-right text-muted">{{ student.email }} &nbsp;&raquo;</span>
+        </a>
+      {% empty %}
+        <div class="alert alert-info">В этой группе пока нет студентов.</div>
+      {% endfor %}
+    </div>
+
+    <hr>
+    <a href="{% url 'groups_list' %}" class="btn btn-default">&larr; Вернуться к списку групп</a>
+    <a href="{% url 'index' %}" class="btn btn-link">На главную</a>
+  </div>
+</div>
+{% endblock %}

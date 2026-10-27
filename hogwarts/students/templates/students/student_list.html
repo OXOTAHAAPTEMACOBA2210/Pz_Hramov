@@ -1,0 +1,98 @@
+{% extends "base_generic.html" %}
+
+{% block title %}<title>Список студентов — Университет Хогвартс</title>{% endblock %}
+
+{% block content %}
+<div class="page-header" style="margin-top: 0;">
+  <h2>
+    Список студентов
+    <span class="badge" style="font-size: 18px; vertical-align: middle;">Всего: {{ total_count }}</span>
+  </h2>
+</div>
+
+<!-- Поиск по студентам (Самостоятельное усложнение) -->
+<form method="get" action="{% url 'students_list' %}" class="form-inline" style="margin-bottom: 20px;">
+  <div class="form-group">
+    <input type="text" name="q" class="form-control" placeholder="Поиск по фамилии или имени..." value="{{ q }}" style="width: 300px;">
+  </div>
+  <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> Найти</button>
+  {% if q %}
+    <a href="{% url 'students_list' %}" class="btn btn-default">Сбросить</a>
+  {% endif %}
+</form>
+
+{% if q %}
+  <p class="text-muted">Результаты поиска по запросу: <strong>«{{ q }}»</strong></p>
+{% endif %}
+
+<!-- Таблица студентов (ПЗ 7, Задание 14 — обработка empty) -->
+<div class="table-responsive">
+  <table class="table table-striped table-hover table-bordered">
+    <thead class="bg-primary" style="color: white;">
+      <tr>
+        <th>#</th>
+        <th>Фамилия и Имя</th>
+        <th>Группа</th>
+        <th>Факультет</th>
+        <th>Email</th>
+        <th>Действие</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for student in students %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td><strong>{{ student.last_name }} {{ student.first_name }}</strong></td>
+          <td><a href="{% url 'group_detail' student.group.pk %}">{{ student.group.name }}</a></td>
+          <td><span class="label label-info">{{ student.group.faculty.name }}</span></td>
+          <td>{{ student.email }}</td>
+          <td>
+            <a href="{% url 'student_detail' student.pk %}" class="btn btn-primary btn-xs">
+              <span class="glyphicon glyphicon-eye-open"></span> Подробнее
+            </a>
+          </td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="6">
+            <div class="alert alert-warning" style="margin-bottom: 0;">
+              <span class="glyphicon glyphicon-warning-sign"></span> Студенты не найдены.
+            </div>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<!-- Пагинация (Самостоятельное усложнение) -->
+{% if is_paginated %}
+  <nav aria-label="Навигация по страницам">
+    <ul class="pagination">
+      {% if page_obj.has_previous %}
+        <li><a href="?page={{ page_obj.previous_page_number }}{% if q %}&q={{ q }}{% endif %}">&laquo; Назад</a></li>
+      {% else %}
+        <li class="disabled"><span>&laquo; Назад</span></li>
+      {% endif %}
+
+      {% for num in paginator.page_range %}
+        {% if page_obj.number == num %}
+          <li class="active"><span>{{ num }}</span></li>
+        {% else %}
+          <li><a href="?page={{ num }}{% if q %}&q={{ q }}{% endif %}">{{ num }}</a></li>
+        {% endif %}
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+        <li><a href="?page={{ page_obj.next_page_number }}{% if q %}&q={{ q }}{% endif %}">Вперед &raquo;</a></li>
+      {% else %}
+        <li class="disabled"><span>Вперед &raquo;</span></li>
+      {% endif %}
+    </ul>
+  </nav>
+{% endif %}
+
+<p style="margin-top: 15px;">
+  <a href="{% url 'index' %}" class="btn btn-default">&larr; На главную страницу</a>
+</p>
+{% endblock %}

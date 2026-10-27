@@ -1,0 +1,61 @@
+{% extends "base_generic.html" %}
+
+{% block title %}<title>Преподаватели — Университет Хогвартс</title>{% endblock %}
+
+{% block content %}
+<div class="page-header" style="margin-top: 0;">
+  <h2>
+    Преподавательский состав
+    <span class="badge" style="font-size: 18px; vertical-align: middle;">Всего: {{ total_count }}</span>
+  </h2>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-hover table-bordered">
+    <thead class="bg-success" style="color: white;">
+      <tr>
+        <th>#</th>
+        <th>Преподаватель</th>
+        <th>Должность</th>
+        <th>Читаемые дисциплины</th>
+        <th>Действие</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for teacher in teachers %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td><strong>{{ teacher.first_name }} {{ teacher.last_name }}</strong></td>
+          <td>{{ teacher.position }}</td>
+          <td>
+            {% for discipline in teacher.disciplines.all %}
+              <a href="{% url 'discipline_detail' discipline.pk %}" class="label label-info" style="margin-right: 4px;">
+                {{ discipline.name }}
+              </a>
+            {% empty %}
+              <span class="text-muted">Нет назначенных дисциплин</span>
+            {% endfor %}
+          </td>
+          <td>
+            <a href="{% url 'teacher_detail' teacher.pk %}" class="btn btn-success btn-xs">
+              <span class="glyphicon glyphicon-eye-open"></span> Подробнее
+            </a>
+          </td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="5">
+            <div class="alert alert-warning" style="margin-bottom: 0;">
+              Преподаватели не добавлены.
+            </div>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<p style="margin-top: 15px;">
+  <a href="{% url 'index' %}" class="btn btn-default">&larr; На главную страницу</a>
+</p>
+{% endblock %}

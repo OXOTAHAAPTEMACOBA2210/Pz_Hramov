@@ -1,0 +1,43 @@
+{% extends "base_generic.html" %}
+
+{% block title %}<title>Факультет {{ faculty.name }}</title>{% endblock %}
+
+{% block content %}
+<ol class="breadcrumb">
+  <li><a href="{% url 'index' %}">Главная</a></li>
+  <li><a href="{% url 'faculties_list' %}">Факультеты</a></li>
+  <li class="active">{{ faculty.name }}</li>
+</ol>
+
+<div class="panel panel-danger">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      <span class="glyphicon glyphicon-flag"></span> Факультет: {{ faculty.name }}
+    </h3>
+  </div>
+  <div class="panel-body">
+    <p class="lead">{{ faculty.description }}</p>
+
+    <h4 style="margin-top: 25px;">Группы факультета:</h4>
+    <div class="row">
+      {% for group in faculty.groups.all %}
+        <div class="col-sm-6">
+          <div class="well">
+            <h4>{{ group.name }}</h4>
+            <p>Студентов в группе: <span class="badge">{{ group.students.count }}</span></p>
+            <a href="{% url 'group_detail' group.pk %}" class="btn btn-warning btn-sm">Перейти к группе &raquo;</a>
+          </div>
+        </div>
+      {% empty %}
+        <div class="col-sm-12">
+          <div class="alert alert-info">К этому факультету пока не привязано групп.</div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <hr>
+    <a href="{% url 'faculties_list' %}" class="btn btn-default">&larr; Вернуться к списку факультетов</a>
+    <a href="{% url 'index' %}" class="btn btn-link">На главную</a>
+  </div>
+</div>
+{% endblock %}

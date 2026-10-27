@@ -1,38 +1,51 @@
 {% extends "base_generic.html" %}
 
+{% block title %}<title>Главная — Университет Хогвартс</title>{% endblock %}
+
 {% block content %}
-  <!-- Оформление заголовка (Задание 3) -->
+  <!-- Оформление заголовка (ПЗ 5, Задание 3) -->
   <div class="jumbotron">
     <h1>Университет Хогвартс</h1>
     <p>Информационная система управления Школой Чародейства и Волшебства.</p>
     
-    <!-- Добавление кнопок (Задание 7) -->
+    <!-- Добавление кнопок (ПЗ 5, Задание 7) -->
     <p>
-      <a href="{% url 'students_list' %}" class="btn btn-primary btn-lg">Управление студентами</a>
-      <a href="{% url 'teachers_list' %}" class="btn btn-success btn-lg">Штат преподавателей</a>
+      <a href="{% url 'students_list' %}" class="btn btn-primary btn-lg">Список студентов</a>
+      <a href="{% url 'teachers_list' %}" class="btn btn-success btn-lg">Преподаватели</a>
+      <a href="{% url 'groups_list' %}" class="btn btn-warning btn-lg">Учебные группы</a>
     </p>
   </div>
 
-  <!-- Информационное сообщение (Задание 8) -->
+  <!-- Информационное сообщение (ПЗ 5, Задание 8) -->
   <div class="alert alert-info">
-    <strong>Справка:</strong> Ниже представлена актуальная статистика по нашей базе данных.
+    <strong>Справка:</strong> Ниже представлена актуальная статистика по нашей базе данных. Нажмите на блок или кнопку для перехода к соответствующему каталогу.
   </div>
 
-  <!-- Сетка для статистики (Задание 5) -->
+  <!-- Сетка для статистики (ПЗ 5, Задания 4 и 5; ПЗ 7 — кликабельные блоки) -->
   <div class="row">
-    <!-- Блок студентов (Задание 4) -->
+    <!-- Блок студентов -->
     <div class="col-sm-6">
       <div class="panel panel-primary">
-        <div class="panel-heading">Студенты</div>
-        <div class="panel-body">Зачислено учеников: <strong>{{ num_students }}</strong></div>
+        <div class="panel-heading">
+          <h3 class="panel-title">Студенты</h3>
+        </div>
+        <div class="panel-body">
+          <p>Зачислено учеников: <strong>{{ num_students }}</strong></p>
+          <a href="{% url 'students_list' %}" class="btn btn-primary btn-sm">Перейти к списку студентов &raquo;</a>
+        </div>
       </div>
     </div>
     
     <!-- Блок преподавателей -->
     <div class="col-sm-6">
       <div class="panel panel-success">
-        <div class="panel-heading">Преподаватели</div>
-        <div class="panel-body">Штат профессоров: <strong>{{ num_teachers }}</strong></div>
+        <div class="panel-heading">
+          <h3 class="panel-title">Преподаватели</h3>
+        </div>
+        <div class="panel-body">
+          <p>Штат профессоров: <strong>{{ num_teachers }}</strong></p>
+          <a href="{% url 'teachers_list' %}" class="btn btn-success btn-sm">Перейти к преподавателям &raquo;</a>
+        </div>
       </div>
     </div>
   </div>
@@ -42,24 +55,39 @@
     <!-- Блок групп -->
     <div class="col-sm-4">
       <div class="panel panel-warning">
-        <div class="panel-heading">Учебные группы</div>
-        <div class="panel-body">Количество: <strong>{{ num_groups }}</strong></div>
+        <div class="panel-heading">
+          <h3 class="panel-title">Учебные группы</h3>
+        </div>
+        <div class="panel-body">
+          <p>Количество групп: <strong>{{ num_groups }}</strong></p>
+          <a href="{% url 'groups_list' %}" class="btn btn-warning btn-sm">Перейти к группам &raquo;</a>
+        </div>
       </div>
     </div>
 
     <!-- Блок факультетов -->
     <div class="col-sm-4">
       <div class="panel panel-danger">
-        <div class="panel-heading">Факультеты</div>
-        <div class="panel-body">Количество: <strong>{{ num_faculties }}</strong></div>
+        <div class="panel-heading">
+          <h3 class="panel-title">Факультеты</h3>
+        </div>
+        <div class="panel-body">
+          <p>Факультетов школы: <strong>{{ num_faculties }}</strong></p>
+          <a href="{% url 'faculties_list' %}" class="btn btn-danger btn-sm">Перейти к факультетам &raquo;</a>
+        </div>
       </div>
     </div>
 
     <!-- Блок дисциплин -->
     <div class="col-sm-4">
       <div class="panel panel-info">
-        <div class="panel-heading">Дисциплины</div>
-        <div class="panel-body">Количество: <strong>{{ num_disciplines }}</strong></div>
+        <div class="panel-heading">
+          <h3 class="panel-title">Дисциплины</h3>
+        </div>
+        <div class="panel-body">
+          <p>Учебных курсов: <strong>{{ num_disciplines }}</strong></p>
+          <a href="{% url 'disciplines_list' %}" class="btn btn-info btn-sm">Перейти к дисциплинам &raquo;</a>
+        </div>
       </div>
     </div>
   </div>
